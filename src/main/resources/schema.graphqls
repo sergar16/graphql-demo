@@ -4,16 +4,16 @@ type Query {
 }
 
 type Player {
-  id: Int!,
-  surname: String!,
-  position: Position,
-  shirtNumber: Int!
+  id: Int
+  surname: String
+  position: Position
+  shirtNumber: Int
 }
 
 enum Position {
-  GOALKEEPER,
-  DEFENDER,
-  MIDLEFILDER,
+  GOALKEEPER
+  DEFENDER
+  MIDLEFILDER
   FORWARD
 }
-}
+
