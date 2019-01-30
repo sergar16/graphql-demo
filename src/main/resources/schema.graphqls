@@ -1,0 +1,19 @@
+type Query {
+  players: [Player]
+  player(id: Int!): Player
+}
+
+type Player {
+  id: Int!,
+  surname: String!,
+  position: Position,
+  shirtNumber: Int!
+}
+
+enum Position {
+  GOALKEEPER,
+  DEFENDER,
+  MIDLEFILDER,
+  FORWARD
+}
+}
