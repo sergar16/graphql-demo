@@ -18,7 +18,7 @@ public class ClubQueryResolver implements GraphQLQueryResolver {
     }
 
     public Club club(String name) {
-        return clubRepository.findOne(name);
+        return clubRepository.findByName(name);
     }
 
 }

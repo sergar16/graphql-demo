@@ -5,17 +5,23 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class Club {
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
     private String name;
+    @OneToOne
     private Stadium stadium;
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Player> players;
+    @OneToOne
     private Coach coach;
-
 }
