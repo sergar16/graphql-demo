@@ -1,6 +1,21 @@
 type Query {
+  club(name: String!): Club
+  clubs: [Club]
   players: [Player]
   player(id: Int!): Player
+}
+
+type Club {
+  id: Int
+  name: String
+  players: [Player]
+  coach: Coach
+}
+
+type Coach {
+  name: String
+  surname: String
+  nationality: String
 }
 
 type Player {

@@ -4,19 +4,20 @@ import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import lombok.AllArgsConstructor;
 import org.serhii.example.model.Player;
 import org.serhii.example.repository.PlayerRepository;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
+@Service
 @AllArgsConstructor
-public class QueryResolver implements GraphQLQueryResolver {
+public class PlayersQueryResolver implements GraphQLQueryResolver {
     private PlayerRepository playerRepository;
 
-    public List<Player> getPlayers() {
+    public List<Player> players() {
         return playerRepository.findAll();
     }
-    public Player getPlayer(Long id) {
+
+    public Player player(Integer id) {
         return playerRepository.findOne(id);
     }
 
