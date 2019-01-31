@@ -1,8 +1,17 @@
+type schema{
+  query: Query
+  mutation: Mutation
+}
+
 type Query {
   club(name: String!): Club
   clubs: [Club]
   players: [Player]
   player(id: Int!): Player
+}
+
+type Mutation {
+  addClub(name: String!): Club
 }
 
 type Club {
@@ -31,4 +40,7 @@ enum Position {
   MIDLEFILDER
   FORWARD
 }
+
+
+
 
