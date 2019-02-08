@@ -16,7 +16,7 @@ public class MockDataProvider {
                 .stadium(new Stadium())
                 .players(Collections.singletonList(
                         Player.builder()
-                                .id(1)
+                                .id(1l)
                                 .surname("Arshavin")
                                 .shirtNumber(23)
                                 .position(Position.MIDLEFILDER)

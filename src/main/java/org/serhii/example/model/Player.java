@@ -15,7 +15,7 @@ import javax.persistence.*;
 public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     private String surname;
     private Position position;
     private Integer shirtNumber;

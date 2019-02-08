@@ -18,7 +18,8 @@ public class PlayersQueryResolver implements GraphQLQueryResolver {
     }
 
     public Player player(Long id) {
-        return playerRepository.findOne(id);
+        return playerRepository.findById(id)
+                .orElseGet(Player::new);
     }
 
 }
