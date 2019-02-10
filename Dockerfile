@@ -4,7 +4,7 @@ WORKDIR /
 VOLUME /tmp
 ARG DEPENDENCY=build/dependency
 
-HEALTHCHECK --interval=10s --timeout=3s CMD curl --fail http://localhost:8080/health || exit 1
+HEALTHCHECK --interval=10s --timeout=3s CMD curl --fail http://localhost:8080/actuator/health || exit 1
 
 COPY ${DEPENDENCY}/BOOT-INF/lib /app/lib
 COPY ${DEPENDENCY}/META-INF /app/META-INF
