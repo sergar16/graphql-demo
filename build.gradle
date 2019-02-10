@@ -7,6 +7,7 @@ buildscript {
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath('gradle.plugin.com.palantir.gradle.docker:gradle-docker:0.13.0')
 	}
 }
 
@@ -17,10 +18,12 @@ plugins {
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'com.palantir.docker'
 
-group = 'com.serhii'
+group = 'com.serhii.example'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
+def dockerOrganization = "serhiihokhkalenko"
 
 repositories {
 	mavenCentral()
@@ -31,16 +34,33 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	runtimeOnly 'com.h2database:h2'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'io.projectreactor:reactor-test'
 
 	compile "com.graphql-java:graphql-java-tools:4.3.0"
 	compile "com.graphql-java:graphql-spring-boot-starter:4.0.0"
 	compile "com.graphql-java:graphiql-spring-boot-starter:4.0.0"
 	compile "org.projectlombok:lombok:1.18.4"
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'io.projectreactor:reactor-test'
 }
 
 lombok {
 	version = '1.18.4'
 	sha256 = ""
+}
+
+bootJar {
+	baseName = 'football-manager'
+	version =  '0.0.1-SNAPSHOT'
+}
+
+task unpack(type: Copy) {
+    dependsOn bootJar
+    from(zipTree(tasks.bootJar.outputs.files.singleFile))
+    into("build/dependency")
+}
+docker {
+    name "${dockerOrganization}/${bootJar.baseName}"
+    copySpec.from(tasks.unpack.outputs).into("dependency")
+    buildArgs(['DEPENDENCY': "dependency"])
 }
