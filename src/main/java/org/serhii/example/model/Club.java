@@ -20,7 +20,7 @@ public class Club {
     private String name;
     @OneToOne
     private Stadium stadium;
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "club", cascade = CascadeType.ALL)
     private List<Player> players;
     @OneToOne
     private Coach coach;
