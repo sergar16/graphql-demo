@@ -12,6 +12,8 @@ type Query {
 
 type Mutation {
   addClub(name: String!): Club
+  addPlayer(surname: String!, clubId: Int!): Player
+  transferPlayer(playerId: Int!, newClub: Int!): Player
 }
 
 type Club {

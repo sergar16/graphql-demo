@@ -6,6 +6,8 @@ import org.serhii.example.model.Club;
 import org.serhii.example.repository.ClubRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+
 @Service
 @AllArgsConstructor
 public class ClubMutationsResolver implements GraphQLMutationResolver {
@@ -13,9 +15,10 @@ public class ClubMutationsResolver implements GraphQLMutationResolver {
 
     public Club addClub(String name){
         Club club = Club.builder()
+                .players(Collections.emptyList())
                 .name(name)
                 .build();
-        clubRepository.save(club);
+        clubRepository.saveAndFlush(club);
         return club;
     }
 }

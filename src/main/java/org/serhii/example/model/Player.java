@@ -16,6 +16,9 @@ public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @ManyToOne
+    @JoinColumn
+    private Club club;
     private String surname;
     private Position position;
     private Integer shirtNumber;
